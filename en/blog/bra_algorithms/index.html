@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="/favicon.svg">
+
+  <title>
+  From Ethics to Clinical Algorithms - P-Hackers
+  </title>
+  <meta name="description" content="The story on how maths can guide a clinical decision" />
+  <meta name="author" content="Gerardo J. Rodriguez" />
+  <meta name="generator" content="Hugo 0.118.2"><link
+    rel="stylesheet"
+    href="https://gero1999.github.io/css/styles.min.84280f337929deb4cd3873c56b4895d342571ca815b8c94a89cd10a4ab281c4d.css"
+    integrity="sha256-hCgPM3kp3rTNOHPFa0iV00JXHKgVuMlKic0QpKsoHE0="
+  />
+  
+  
+
+  <meta property="og:title" content="From Ethics to Clinical Algorithms" />
+<meta property="og:description" content="The story on how maths can guide a clinical decision" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gero1999.github.io/en/blog/bra_algorithms/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-09-16T07:58:53+02:00" />
+<meta property="article:modified_time" content="2023-09-16T07:58:53+02:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="From Ethics to Clinical Algorithms"/>
+<meta name="twitter:description" content="The story on how maths can guide a clinical decision"/>
+
+  <meta itemprop="name" content="From Ethics to Clinical Algorithms">
+<meta itemprop="description" content="The story on how maths can guide a clinical decision"><meta itemprop="datePublished" content="2023-09-16T07:58:53+02:00" />
+<meta itemprop="dateModified" content="2023-09-16T07:58:53+02:00" />
+<meta itemprop="wordCount" content="1139">
+<meta itemprop="keywords" content="pharmacovigilance,bayesian," />
+
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://gero1999.github.io/en/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="/avatar.png" alt="P-Hackers" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="/en/blog">Blog</a></li>
+    
+    <li><a href="/en/page/about/">About me</a></li>
+    
+    <li><a href="/en/tags">Tags</a></li>
+    
+
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">From Ethics to Clinical Algorithms</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      Posted on 
+  
+    September 16, 2023
+  
+
+
+      
+        &nbsp;&bull;&nbsp;
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      6&nbsp;minutes
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      1139&nbsp;words
+      
+        
+      
+    </h5>
+    
+
+    <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4"><ul>
+        
+
+        
+        <li>
+        <a href="#decision-making-in-benefit-risk-assessment-bra-in-pharmacovigilance">Decision-Making in Benefit-Risk Assessment (BRA) in Pharmacovigilance</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#methodologies-for-bra">Methodologies for BRA</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#2-quantitative-scoring-algorithms">2. Quantitative Scoring Algorithms</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#international-guidelines">International Guidelines</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#model-example-with-bayesian-statistics">Model example with Bayesian statistics</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#okay-but-what-is-a-multidimensional-latent-trait-model">Okay, but what is a Multidimensional Latent Trait Model</a>
+        
+
+        
+        </li></ul>
+      </li></ul>
+          <li>
+        <a href="#closing-thoughts-on-bras">Closing Thoughts on BRAs</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#reference">Reference</a>
+        </li></ul>
+    </li></ul>
+  </details>
+
+    <h1 id="heading"></h1>
+<h1 id="heading-1"></h1>
+<h2 id="decision-making-in-benefit-risk-assessment-bra-in-pharmacovigilance">Decision-Making in Benefit-Risk Assessment (BRA) in Pharmacovigilance</h2>
+<p>In relation with clinical trials, decision-making is a critical process based on the evaluation of the Benefit-Risk Assessment (BRA). BRA measure is used to make a binary operation: support or withhold a particular medical treatment. This assessment is paramount to ensure that the benefits of a treatment outweigh the associated risks, which corresponds one of the three basic Belmont principles. But how is it actually done?</p>
+<h3 id="methodologies-for-bra">Methodologies for BRA</h3>
+<p>BRA can take into account a multitude of variables, including patient&rsquo;s quality of life and treatment convenience. However, at its core, the assessment primarily revolves around two fundamental components: efficacy (as benefits) and potential negative outcomes (as risks). These components are typically represented as a ratio:</p>
+<p>$$ \text{BRA} = \frac{\text{Benefits}}{\text{Risks}}  \tag{Eq.1}$$</p>
+<p>The complexity of BRA lies in the decision of how to compare these benefits and risks, particularly when dealing with variables that are challenging to assess. Various criteria can be employed for this task, ranging from intuition to logical rules, weightings, or value analysis based on societal considerations. Regardless of the chosen metric, the methodology for conducting the assessment is a crucial consideration, and it can be categorized into two primary approaches:</p>
+<h1 id="heading-2"></h1>
+<p><strong>1. Qualitative Frameworks</strong> <br>
+Qualitative frameworks provide a structured and logically described set of rules to assess each variable and determine their relative importance in the BRA process. These frameworks are typically designed even before the commencement of the third clinical phase, where data collection allows for the construction of an effect&rsquo;s table.</p>
+<h1 id="heading-3"></h1>
+<h4 id="2-quantitative-scoring-algorithms">2. Quantitative Scoring Algorithms</h4>
+<p>Quantitative scoring algorithms, on the other hand, involve an analytical computation of the importance of each variable based on a structured numeric approach. While these algorithms are gaining popularity, they have yet to establish themselves as the dominant approach in BRA.</p>
+<h1 id="heading-4"></h1>
+<h3 id="international-guidelines">International Guidelines</h3>
+<p>Several international organizations, including the U.S. Food and Drug Administration (FDA), provide guidelines and recommendations on the best practices for implementing qualitative frameworks in BRA <a href="https://www.fda.gov/media/152544/download" target="_blank" rel="noopener">FDA BRA Guidelines</a>
+. On the other hand, quantitative algorithms, although advancing, remain an area of ongoing development.</p>
+<p>In summary, the process of Benefit-Risk Assessment is a multifaceted and critical component of medical decision-making. The choice between qualitative frameworks and quantitative algorithms depends on the specific context and available data, and both approaches contribute to ensuring the safety and effectiveness of medical treatments.</p>
+<h1 id="heading-5"></h1>
+<h1 id="heading-6"></h1>
+<h1 id="heading-7"></h1>
+<h2 id="model-example-with-bayesian-statistics">Model example with Bayesian statistics</h2>
+<p>The current explanation is based on the work of Kan Li et al (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6681911/" target="_blank" rel="noopener">PMCID: PMC6681911</a>
+). Some aspects have been simplified, as long as the purpose of this article is to explain the intution behind the maths they propose. However, a more complete explanation and the Stan code of the original work can be found in the included link.</p>
+<p>With that said, how do we fabricate mathematical formulas to assess BRA? Let&rsquo;s first of all define our data: Imagine we are studying a set of K treatments (k = 1, &hellip;, K) assessed on J criteria (j = 1, &hellip;, J) for a given patient i (i = 1, &hellip;, I). The criteria measurements corresponding to treatment k on patient i are denoted by ξᵢₖ, where ξᵢₖ = [ξᵢ₁ₖ, &hellip;, ξᵢJₖ]ᵀ, representing the performance of treatment k on each criterion j.</p>
+<p>In a clinical trial, benefit and risk criteria are typically expressed through measurable efficacy and safety. These criteria may take various formats, such as probabilities or continuous measurements. The trade-off between benefit and risk for a specific treatment is represented by an integrated BR measure, calculated using the additive utility score:</p>
+<p>$$
+uᵢ(ξᵢₖ, wᵢ) = \sum_{j=1}^{J} wᵢuⱼ(ξᵢⱼₖ)    \tag{Eq.2}
+$$</p>
+<p>where: - wᵢⱼ represents the weight assigned to criterion j by patient i, assumed to follow a Dirichlet distribution. Why? Simply because, in bayesian statistics, constitutes the prior of a multinomial distribution. If you think about it weights are no more than representing a multivariate probability distribution, with values between 0 and 1.</p>
+<p>The weights vector wᵢ denotes the relative importance of criteria elicited by patient i, reflecting their preferences on benefit and risk criteria (and they follow as well a Dirichlet distribution!). The PVF function, uⱼ(ξᵢⱼₖ) ,maps criterion values ξᵢⱼₖ to the same scale (1) making risks and benefits comparable. The PVF can be defined as follows:</p>
+<p>$$
+uⱼ(ξᵢⱼₖ) = \frac{{ξᵢⱼₖ - ξᵢ&rsquo;ⱼ}}{{ξᵢ&rsquo;&lsquo;ⱼ - ξᵢ&rsquo;ⱼ}}    \tag{Eq.3}
+$$</p>
+<p>where ξᵢ&rsquo;ⱼ and ξᵢ&rsquo;&lsquo;ⱼ are the least and most preferable values of criterion j.</p>
+<h1 id="heading-8"></h1>
+<h3 id="okay-but-what-is-a-multidimensional-latent-trait-model">Okay, but what is a Multidimensional Latent Trait Model</h3>
+<p>The main aspects of a treatment&rsquo;s response are the outcomes (benefits and risks) and the relevant covariates (such as blood pressure or presence of fever) associated to them. All these variables together are explanatory of the specific situation of the patient, and for that reason, seems logical to assume that they are not simply independant to each other. How can we model statistically their relation? One reasonable option is by assuming they are all generated by the same latent variables.</p>
+<p>And there is more we need to assume. If we think about it, the observed outcomes from a treatment can actually have many natures. There is indeed a multivariate distributions in these variables. Under the local independce assumption, the observed outcomes yᵢ for a patient i can be written as:</p>
+<p>For binary outcomes:
+$$\text{logit}(p(yᵢⱼ=1 | xᵢ, Tᵢₖ, θᵢ)) = \text{logit}(ξᵢⱼₖ) = xᵢᵀβⱼ + Tᵢₖᵀβᵗᵣⱼ + θᵢᵀλⱼ     \tag{Eq.4}$$
+where ξᵢⱼₖ follows a Bernoulli distribution.</p>
+<p>For continuous outcomes:
+$$
+yᵢⱼ&rsquo; | xᵢ, Tᵢₖ, θᵢ = ξᵢⱼ&rsquo;ₖ = xᵢᵀβⱼ&rsquo; + Tᵢₖᵀβᵗᵣⱼ&rsquo; + θᵢᵀλⱼ&rsquo; + εᵢⱼ&rsquo;         \tag{Eq.5}
+$$
+where εᵢⱼ&rsquo; follows a normal distribution.</p>
+<p>Additionally, we assume these latent variables ($\theta_{i}$) responsible of generating such a variety of differently distributed variables may be exponentially distributed. In any case, as you can see by the formulas their use and inference predicts the objective outcomes (risks and benefits) that can be used as shown in Eq.1 to generate the Benefits Risk Assesment.</p>
+<h1 id="heading-9"></h1>
+<h1 id="closing-thoughts-on-bras">Closing Thoughts on BRAs</h1>
+<p>In the end, Benefits Risk Assesments are not yet a not closed matter.There is no universal method for its computation, due to the complexity of actually comparing two different things (risks and benefits). Howver, certain essential criteria must be always met for a BRA to gain approval:</p>
+<ol>
+<li><strong>Coherent ethical definition</strong></li>
+<li><strong>Transparent weighting reasoning</strong></li>
+<li><strong>Reproducibility with study data</strong></li>
+</ol>
+<p>It&rsquo;s worth noting that the significance of these statistics is not fixed and can evolve throughout the clinical phases. Furthermore, the threshold required for a treatment to be deemed successful can vary significantly depending on factors such as the disease&rsquo;s nature, its severity, and the level of competition in the market.</p>
+<p>However, it&rsquo;s crucial to remember that the ultimate decision to participate in a clinical trial should always rest with the patient, considering their unique circumstances and preferences.</p>
+<h1 id="heading-10"></h1>
+<h2 id="reference">Reference</h2>
+<p>Li K, Luo S, Yuan S, Mt-Isa S. A Bayesian approach for individual-level drug benefit-risk assessment. Stat Med. 2019 Jul 20;38(16):3040-3052. doi: 10.1002/sim.8166. Epub 2019 Apr 15. PMID: 30989691; PMCID: PMC6681911.</p>
+
+  </article>
+<div class="px-2 mb-2">
+  
+  <script src="https://giscus.app/client.js"
+    data-repo=""
+    data-repo-id=""
+    data-category=""
+    data-category-id=""
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+  </script>
+  
+</div>
+<div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2">Follow me</div>
+      <p class="opacity-60">I also have a science YouTube channel! @Bio100</p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href="https://www.linkedin.com/in/gerardo-ra/"
+          target="_blank"
+          rel="noopener"
+          aria-label="LinkedIn"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+            <line x1="8" y1="11" x2="8" y2="16" />
+            <line x1="8" y1="8" x2="8" y2="8.01" />
+            <line x1="12" y1="16" x2="12" y2="11" />
+            <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href="https://github.com/Gero1999"
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+            />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href="https://medium.com/"
+          target="_blank"
+          rel="noopener"
+          aria-label="Medium"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+            <path d="M8 9h1l3 3l3 -3h1" />
+            <line x1="8" y1="15" x2="10" y2="15" />
+            <line x1="14" y1="15" x2="16" y2="15" />
+            <line x1="9" y1="9" x2="9" y2="15" />
+            <line x1="15" y1="9" x2="15" y2="15" />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href="https://stackoverflow.com/users/15151707/gero"
+          target="_blank"
+          rel="noopener"
+          aria-label="stackoverflow"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-brand-stackoverflow"
+              width="23"
+              height="23"
+              viewBox="-135 22 32 38"
+              stroke-width="0.2"
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+          >
+            <polygon points="-108.5,56.2 -108.5,46.3 -105.2,46.3 -105.2,59.5 -135,59.5 -135,46.3 -131.7,46.3 -131.7,56.2       "/>
+            <path d="M-128,45.4l16.2,3.4l0.7-3.2l-16.2-3.4L-128,45.4z M-125.9,37.6l15,7l1.4-3l-15-7L-125.9,37.6z     M-121.7,30.2l12.7,10.6l2.1-2.5l-12.7-10.6L-121.7,30.2z M-113.5,22.4l-2.7,2l9.9,13.3l2.7-2L-113.5,22.4z M-128.4,52.9h16.6    v-3.3h-16.6V52.9z"/>
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href="https://www.youtube.com/@Bio_100"
+          target="_blank"
+          rel="noopener"
+          aria-label="YouTube"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-brand-youtube"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="12" cy="12" r="9" />
+            <path d="M10 9l5 3l-5 3z" />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2021 - Gerardo J. Rodriguez · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://gero1999.github.io/js/scripts.min.js"></script>
+
+
+
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

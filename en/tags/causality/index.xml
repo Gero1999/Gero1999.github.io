@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>causality on P-Hackers</title>
+    <link>https://gero1999.github.io/en/tags/causality/</link>
+    <description>Recent content in causality on P-Hackers</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 17 Sep 2023 07:58:53 +0200</lastBuildDate><atom:link href="https://gero1999.github.io/en/tags/causality/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>To Cause or not to Cause</title>
+      <link>https://gero1999.github.io/en/blog/to_cause_or_not_to_cause/</link>
+      <pubDate>Sun, 17 Sep 2023 07:58:53 +0200</pubDate>
+      
+      <guid>https://gero1999.github.io/en/blog/to_cause_or_not_to_cause/</guid>
+      <description>Unraveling the Enigma of Causation: Beyond Correlation &amp;ldquo;Causation&amp;rdquo; is a term frequently tossed around in scientific and everyday conversations alike. We often hear the refrain, &amp;ldquo;Correlation is not causation,&amp;rdquo; reminding us of the pitfalls of assuming a cause-and-effect relationship based exclusively on observed associations. For example, the fact that there is a positive correlation between ice cream sales and the number of crimes does not necessarily mean that the first ones produce the last.</description>
+    </item>
+    
+  </channel>
+</rss>

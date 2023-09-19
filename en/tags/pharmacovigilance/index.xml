@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pharmacovigilance on P-Hackers</title>
+    <link>https://gero1999.github.io/en/tags/pharmacovigilance/</link>
+    <description>Recent content in pharmacovigilance on P-Hackers</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 19 Sep 2023 07:58:53 +0200</lastBuildDate><atom:link href="https://gero1999.github.io/en/tags/pharmacovigilance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About me</title>
+      <link>https://gero1999.github.io/en/page/about/</link>
+      <pubDate>Tue, 19 Sep 2023 07:58:53 +0200</pubDate>
+      
+      <guid>https://gero1999.github.io/en/page/about/</guid>
+      <description> Gerardo J. Rodriguez Information Email gerardo.jrac@gmail.com &amp;ldquo;When you look into an abyss, the abyss also looks into you.&amp;rdquo; Okay Nietszche, let&amp;rsquo;s not be that dramatic. Here are my credentials: 1) I am a bioinformatician, 2) I enjoy sharing the intuition behind maths and statistics, 3) Fortunately, I am still learning
+Resume
+Education Experience Projects Skills &amp;amp;amp; Qualifications </description>
+    </item>
+    
+    <item>
+      <title>From Ethics to Clinical Algorithms</title>
+      <link>https://gero1999.github.io/en/blog/bra_algorithms/</link>
+      <pubDate>Sat, 16 Sep 2023 07:58:53 +0200</pubDate>
+      
+      <guid>https://gero1999.github.io/en/blog/bra_algorithms/</guid>
+      <description>Decision-Making in Benefit-Risk Assessment (BRA) in Pharmacovigilance In relation with clinical trials, decision-making is a critical process based on the evaluation of the Benefit-Risk Assessment (BRA). BRA measure is used to make a binary operation: support or withhold a particular medical treatment. This assessment is paramount to ensure that the benefits of a treatment outweigh the associated risks, which corresponds one of the three basic Belmont principles. But how is it actually done?</description>
+    </item>
+    
+  </channel>
+</rss>

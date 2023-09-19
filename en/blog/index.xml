@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>P-Hackers</title>
-    <link>https://gero1999.github.io/en/</link>
-    <description>Recent content on P-Hackers</description>
+    <title>Blogs on P-Hackers</title>
+    <link>https://gero1999.github.io/en/blog/</link>
+    <description>Recent content in Blogs on P-Hackers</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 19 Sep 2023 07:58:53 +0200</lastBuildDate><atom:link href="https://gero1999.github.io/en/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>About me</title>
-      <link>https://gero1999.github.io/en/page/about/</link>
-      <pubDate>Tue, 19 Sep 2023 07:58:53 +0200</pubDate>
-      
-      <guid>https://gero1999.github.io/en/page/about/</guid>
-      <description> Gerardo J. Rodriguez Information Email gerardo.jrac@gmail.com &amp;ldquo;When you look into an abyss, the abyss also looks into you.&amp;rdquo; Okay Nietszche, let&amp;rsquo;s not be that dramatic. Here are my credentials: 1) I am a bioinformatician, 2) I enjoy sharing the intuition behind maths and statistics, 3) Fortunately, I am still learning
-Resume
-Education Experience Projects Skills &amp;amp;amp; Qualifications </description>
-    </item>
-    
+    <lastBuildDate>Sun, 17 Sep 2023 07:58:53 +0200</lastBuildDate><atom:link href="https://gero1999.github.io/en/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>To Cause or not to Cause</title>
       <link>https://gero1999.github.io/en/blog/to_cause_or_not_to_cause/</link>
