@@ -14,7 +14,7 @@
   <p align="center">
     A statistics blog with enough significance
     <br />
-    <a href="https://github.com/Gero1999/code/edit/main/Python/HMM_profile_analyser"><strong>Explore the docs »</strong></a>
+    <a href="https://gero1999.github.io/en/"><strong>Visit the website»</strong></a>
     <br />
     <br />
   </p>
