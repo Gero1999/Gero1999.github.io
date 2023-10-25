@@ -31,7 +31,8 @@ The blog focuses on discussing:
 * Philosphy behind prediction and causality
 * Simulation of biological and chemical processes
 
-
+### Author
+[Gerardo J. Rodríguez](https://github.com/Gero1999)
 
 ### Built With
 
