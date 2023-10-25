@@ -20,7 +20,7 @@
   </p>
 </div>
 
-
+Welcome to P-Hackers: Where Statistics Meets Discovery! Dive into the fascinating world of data analysis, hypothesis testing, and the secrets behind making sense of numbers. Let's uncover the mysteries, one p-value at a time
 
 
 <!-- ABOUT THE PROJECT -->
